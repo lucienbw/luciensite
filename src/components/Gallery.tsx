@@ -1,6 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react'
-import pictureFrameImg from '../assets/pictureFrame.png'
+import React, { useState } from 'react'
 import angelImg from '../assets/paintings/Angel.jpeg'
 import cloudsImg from '../assets/paintings/Clouds.jpeg'
 import flowImg from '../assets/paintings/Flow.jpeg'

@@ -1,7 +1,5 @@
-import React, { use, useState } from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import React from "react";
 import websiteIntro from '../assets/websiteIntro.mp4'
-import websiteIntro2 from '../assets/websiteIntro2.mp4'
 import myFace from '../assets/myFace.jpg'
 import myFaceEvil from '../assets/myFaceEvil.jpg'
 
@@ -10,12 +8,6 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({override}) => {
-    const [videoUrl, setVideoUrl] = useState(websiteIntro);
-    const [auto, setAuto] = useState(false);
-    function SwapVideo() {
-        setVideoUrl(websiteIntro2);
-        setAuto(false);
-    }
     return (
         <div>
             <h3 className="text-4xl p-[2%]"> Welcome to my {!override ? "Game..." : "Portfolio Website!"}</h3>
@@ -30,7 +22,7 @@ const Home: React.FC<HomeProps> = ({override}) => {
                     Welcome to the game. You might notice there isn't much to interact with here. You'll have to search for items to help you access the rest of the site.
                     Good luck!</p>}
             </div>
-            <video className="mx-auto p-[1%] h-[calc(8vh+10vw)]" src={videoUrl} controls muted autoPlay={auto}></video>
+            <video className="mx-auto p-[1%] h-[calc(8vh+10vw)]" src={websiteIntro} controls muted autoPlay={false}></video>
         </div>
     )
 }

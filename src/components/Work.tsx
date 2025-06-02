@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import homePageImg from '../assets/work-samples/MainNenu.png'
 import blackjackImg from '../assets/work-samples/Blackjack.png'
 import twdImg from '../assets/work-samples/TWDSlots.jpg'

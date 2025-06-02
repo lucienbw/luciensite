@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import windowImg from '../assets/window.png'
 import windowImgLit from '../assets/windowLit.png'
 
