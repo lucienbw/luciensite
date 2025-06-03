@@ -6,6 +6,8 @@ import flowImg from '../assets/paintings/Flow.jpeg'
 import handImg from '../assets/paintings/Hand.jpeg'
 import poolImg from '../assets/paintings/Pool.jpeg'
 import protectImg from '../assets/paintings/Protect.jpeg'
+import crowbarImg from '../assets/paintings/Crowbar.jpeg'
+import crowbarEmptyImg from '../assets/paintings/CrowbarEmpty.jpeg'
 
 interface GalleryProps {
     onClick: () => void;
@@ -39,14 +41,15 @@ const Gallery: React.FC<GalleryProps> = ({onClick, crowbarCollected, override}) 
             <div onClick={() => {setActiveImg(protectImg)}} className={`bg-auto painting hover:animate-grow hover:scale-[110%] animate-shrink m-[1vw] bg-[url('/src/assets/paintings/Protect.jpeg')]`}>
                 <div className={`relative bg-no-repeat frame h-full w-auto bg-[url('/src/assets/frameArt.png')] `}/>
             </div>
-            {!override && <div onClick={() => { if(!crowbarCollected && crowbar){onClick();} setCrowbar(false)}} className={`bg-auto painting hover:animate-grow hover:scale-[110%] animate-shrink m-[1vw] 
+            {!override && <div onClick={() => { setActiveImg(crowbarImg)}} className={`bg-auto painting hover:animate-grow hover:scale-[110%] animate-shrink m-[1vw] 
             ${crowbar && !crowbarCollected ? `bg-[url('/src/assets/paintings/Crowbar.jpeg')]` : `bg-[url('/src/assets/paintings/CrowbarEmpty.jpeg')]` }`}>
                 <div className={`relative bg-no-repeat frame h-full w-auto bg-[url('/src/assets/frameArt.png')] `}/>
             </div>}
         </div>
             {activeImg != '' && <div onClick={() => {setActiveImg('')}} className={`fixed top-[0] left-[0] bg-[rgb(0,0,0)]/70 w-[100%] h-[100%]`}></div>}
-            {activeImg != '' && <div className='absolute container pointer-events-none'>
-                <img className='mx-auto h-[calc(25vh+25vw)] border-solid rounded-lg border-[10px]' src={activeImg} alt="" />
+            {activeImg != '' && <div className={`absolute container pointer-events-none`}>
+                <img onClick={() => { if(!crowbarCollected && crowbar && activeImg == crowbarImg){onClick(); setCrowbar(false); setActiveImg(crowbarEmptyImg)}}} 
+                className={`mx-auto h-[calc(25vh+25vw)] border-solid rounded-lg border-[10px] ${crowbarCollected || !crowbar || activeImg != crowbarImg ? '' : 'pointer-events-auto'}`} src={activeImg} alt="" />
             </div>}
 
         </div>
