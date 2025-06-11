@@ -8,6 +8,8 @@ import poolImg from '../assets/paintings/Pool.jpeg'
 import protectImg from '../assets/paintings/Protect.jpeg'
 import crowbarImg from '../assets/paintings/Crowbar.jpeg'
 import crowbarEmptyImg from '../assets/paintings/CrowbarEmpty.jpeg'
+import gameImg from '../assets/purplePuncherArt.png'
+import GameComponent from '../game/GamePlayer.tsx'
 
 interface GalleryProps {
     onClick: () => void;
@@ -45,11 +47,24 @@ const Gallery: React.FC<GalleryProps> = ({onClick, crowbarCollected, override}) 
             ${crowbar && !crowbarCollected ? `bg-[url('/src/assets/paintings/Crowbar.jpeg')]` : `bg-[url('/src/assets/paintings/CrowbarEmpty.jpeg')]` }`}>
                 <div className={`relative bg-no-repeat frame h-full w-auto bg-[url('/src/assets/frameArt.png')] `}/>
             </div>}
+            <div onClick={() => {setActiveImg(gameImg)}} className={`bg-auto painting hover:animate-grow hover:scale-[110%] animate-shrink m-[1vw] bg-[url('/src/assets/purplePuncherArt.png')]`}>
+                <div className={`relative bg-no-repeat frame h-full w-auto bg-[url('/src/assets/frameArt.png')] `}/>
+            </div>
         </div>
             {activeImg != '' && <div onClick={() => {setActiveImg('')}} className={`fixed top-[0] left-[0] bg-[rgb(0,0,0)]/70 w-[100%] h-[100%]`}></div>}
-            {activeImg != '' && <div className={`absolute container pointer-events-none`}>
-                <img onClick={() => { if(!crowbarCollected && crowbar && activeImg == crowbarImg){onClick(); setCrowbar(false); setActiveImg(crowbarEmptyImg)}}} 
-                className={`mx-auto h-[calc(25vh+25vw)] border-solid rounded-lg border-[10px] ${crowbarCollected || !crowbar || activeImg != crowbarImg ? '' : 'pointer-events-auto'}`} src={activeImg} alt="" />
+            {activeImg != '' && activeImg != "game" && <div className={`absolute container pointer-events-none`}>
+                <img onClick={() => { 
+                    if (!crowbarCollected && crowbar && activeImg == crowbarImg){onClick(); setCrowbar(false); setActiveImg(crowbarEmptyImg)}
+                    if (activeImg == gameImg) { setActiveImg("game") }
+                }} 
+                className={`mx-auto h-[calc(25vh+25vw)] border-solid rounded-lg border-[10px] 
+                    ${(crowbarCollected || !crowbar || activeImg != crowbarImg) && activeImg != gameImg ? '' : 'pointer-events-auto'}`}
+                src={activeImg} alt="" />
+            </div>}
+            {activeImg == "game" && <div className={`absolute container pointer-events-none flex`}>
+                <div className='mx-auto'>
+                <GameComponent></GameComponent>
+                </div>
             </div>}
 
         </div>

@@ -6,12 +6,12 @@ import Work from './components/Work.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import OverrideButton from './components/OverrideButton.tsx';
 import CodeEntry from './components/CodeEntry.tsx';
-import Inventory from './components/Inventory.tsx'
+import Inventory from './components/Inventory.tsx';
+import { eventEmitter } from './game/GamePlayer.tsx';
 
 import Nav from './components/Nav';
 import SettingsPage from './components/SettingsPage.tsx';
 // Define the type for the GLTF model
-
 
 function App() {
   const [override, setOverride] = useState(false);
@@ -24,6 +24,7 @@ function App() {
   const [showInventory, setShowInventory] = useState(false)
   const [screwDriverCollected, setScrewDriverCollected] = useState(false)
   const [crowbarCollected, setCrowbarCollected] = useState(false)
+  const [coinCollected, setCoinCollected] = useState(false)
   function handleOverride() {
     setOverride(!override)
     // Perform actions in the parent component
@@ -32,12 +33,21 @@ function App() {
     setSettingsOpen(on)
     // Perform actions in the parent component
   }
+
+  eventEmitter.on('gameWon', () => {getItem('coin', "bg-[url('/src/assets/coin.png')]")})
+
   function getItem(id: string, url: string){
     if (id == 'screwdriver'){
       setScrewDriverCollected(true);
     }
     if (id == 'crowbar'){
       setCrowbarCollected(true);
+    }
+    if (id == 'coin'){
+      if (coinCollected){
+        return;
+      }
+      setCoinCollected(true);
     }
     const idArray: string[] = [];
     const urlArray: string[] = [];
