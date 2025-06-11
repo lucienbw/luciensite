@@ -5,7 +5,6 @@ import Home from './components/Home.tsx'
 import Work from './components/Work.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import OverrideButton from './components/OverrideButton.tsx';
-import CodeEntry from './components/CodeEntry.tsx';
 import Inventory from './components/Inventory.tsx';
 import { eventEmitter } from './game/GamePlayer.tsx';
 
@@ -89,11 +88,6 @@ function App() {
     <div className='bg-sitegreen'>
     {!override && <Inventory itemIDs={itemIDs} itemURLs={itemURLs} onClick={handleSetActiveItem} show={showInventory}/>}
     <BrowserRouter>
-      {!override && false && <div className='row-span-[3]'>
-        <CodeEntry imageUrl={`bg-[url('/src/assets/paintings/Present.jpeg')]`} isActive={true} code='PAST' font='font-old' />
-        <CodeEntry imageUrl={`bg-[url('/src/assets/paintings/Present.jpeg')]`} isActive={true} code='PRESENT' font='font-now'/>
-        <CodeEntry imageUrl={`bg-[url('/src/assets/paintings/Present.jpeg')]`} isActive={true} code='FUTURE' font='font-new'/>
-      </div>}
       {settingsOpen && <SettingsPage override={override} screwDriverCollected={screwDriverCollected} onClick={() => toggleSettings(false)} getItem={() => getItem('screwdriver', "bg-[url('/src/assets/screwdriver.png')]")}/>}
       <OverrideButton onClick={handleOverride} isActive={override} />
       <Nav override ={override} gallery={galleryActive} work={workActive} onClickSettings={() => toggleSettings(true)} unlockGallery={handleUnlockGallery} unlockWork={handleUnlockWork}/>
